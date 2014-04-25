@@ -24,6 +24,7 @@ public class AboutInterface extends JDialog {
 	JLabel jl;
 	mainpanel.setLayout(new BoxLayout(mainpanel, BoxLayout.PAGE_AXIS));
 	
+	
 	BufferedImage img;
 	try {
 	    img = ImageIO.read(getClass().getResource("image/32.png"));
