@@ -90,6 +90,7 @@ public class ShutdownTimer extends TimerTask {
     private String escapeTime() {
 	int a = 0;
 	String escapetime = "";
+	int[] et = new int[3];
 	if (normal) {
 	    for (int i = 0; i < dayPriorityList.length; i++) {
 		if (dayPriorityList[i].equals(shuttime)) {
@@ -103,18 +104,27 @@ public class ShutdownTimer extends TimerTask {
 	if (a == 0 && !(shutday == null)) {
 	    String[] currenttime = time[3].split(":");
 	    for (int i = 0; i < currenttime.length; i++) {
+		
 		int tempnum = Integer.parseInt(shutday[i])
 			- Integer.parseInt(currenttime[i]);
+		
 		if (tempnum <= 0 && !(tempnum==0 && i == 0)) {
 		    tempnum = 60 + tempnum;
+		    if(i ==1){
+			et[i-1] -= 1;
+		    }
 		}
-		if (i <= 1 && !(tempnum==0)) {
+		if (i == 1 && !(tempnum==0)) {
 		    tempnum -= 1;
 		}
-		if (String.valueOf(tempnum).length() == 1) {
-		    escapetime += "0" + String.valueOf(tempnum);
+		et[i] = tempnum;
+		
+	    }
+	    for(int i = 0; i < et.length; i++){
+		if (String.valueOf(et[i]).length() == 1) {
+		    escapetime += "0" + String.valueOf(et[i]);
 		} else {
-		    escapetime += String.valueOf(tempnum);
+		    escapetime += String.valueOf(et[i]);
 		}
 		if (i >= 0 && i < 2) {
 		    escapetime += ":";
